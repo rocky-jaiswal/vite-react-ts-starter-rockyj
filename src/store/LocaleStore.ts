@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware'
 
 export interface LocaleState {
   locale: string
@@ -16,24 +16,16 @@ export const defaultLocaleState: LocaleState = {
 }
 
 export const useLocaleStore = create<LocaleState>()(
-  devtools(
-    persist(
-      (set) => ({
-        locale: defaultLocaleState.locale,
-        currentLanguage: defaultLocaleState.currentLanguage,
-        changeLanguage: (lang) =>
-          set((state) => {
-            return {
-              ...state,
-              locale: state.locale === 'en-EN' ? 'de-DE' : 'en-EN',
-              currentLanguage: lang,
-            }
-          }),
+  devtools((set) => ({
+    locale: defaultLocaleState.locale,
+    currentLanguage: defaultLocaleState.currentLanguage,
+    changeLanguage: (lang) =>
+      set((state) => {
+        return {
+          ...state,
+          locale: state.locale === 'en-EN' ? 'de-DE' : 'en-EN',
+          currentLanguage: lang,
+        }
       }),
-      {
-        name: 'locale-storage',
-        storage: createJSONStorage(() => sessionStorage),
-      },
-    ),
-  ),
+  })),
 )

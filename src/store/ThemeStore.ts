@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware'
 
 interface Styles {
   color: string
@@ -37,25 +37,17 @@ export const defaultThemeState: ThemeState = {
 }
 
 export const useThemeStore = create<ThemeState>()(
-  devtools(
-    persist(
-      (set) => ({
-        themes: defaultThemeState.themes,
-        currentTheme: defaultThemeState.currentTheme,
-        toggleTheme: () =>
-          set((state) => {
-            // console.log(state)
-            return {
-              ...state,
-              currentTheme:
-                state.currentTheme === state.themes.dark ? state.themes.light : state.themes.dark,
-            }
-          }),
+  devtools((set) => ({
+    themes: defaultThemeState.themes,
+    currentTheme: defaultThemeState.currentTheme,
+    toggleTheme: () =>
+      set((state) => {
+        // console.log(state)
+        return {
+          ...state,
+          currentTheme:
+            state.currentTheme === state.themes.dark ? state.themes.light : state.themes.dark,
+        }
       }),
-      {
-        name: 'theme-storage',
-        storage: createJSONStorage(() => sessionStorage),
-      },
-    ),
-  ),
+  })),
 )
