@@ -5,9 +5,14 @@ interface CountState {
   count: number
 }
 
-type actionTypes = 'INCREASE' | 'DECREASE'
+type ActionTypes = 'INCREASE' | 'DECREASE'
 
-const reducer = (state: CountState, { type }: { type: actionTypes }) => {
+interface Actions {
+  type: ActionTypes
+  payload?: unknown
+}
+
+const reducer = (state: CountState, { type }: Actions) => {
   switch (type) {
     case 'INCREASE':
       return { count: state.count + 1 }
@@ -32,5 +37,5 @@ export const useCountStore = create<CountState>()(
   ),
 )
 
-export const dispatchForCountStore = (args: { type: actionTypes }) =>
+export const dispatchForCountStore = (args: Actions) =>
   useCountStore.setState((state: CountState) => reducer(state, args))
