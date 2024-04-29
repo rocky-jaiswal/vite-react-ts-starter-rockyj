@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { ReactLogo } from '/@/components/ReactLogo'
-import { useCountStore } from '/@/store'
+import { dispatchForCountStore, useCountStore } from '/@/store'
 
 export const HomePage: React.FC = () => {
   const countStore = useCountStore()
@@ -25,16 +25,22 @@ export const HomePage: React.FC = () => {
       </button>
 
       <button
-        className="my-2 rounded-md px-4 py-1 text-2xl"
+        className="my-2 rounded-md bg-white px-4 py-1 text-2xl"
         type="button"
-        onClick={() => countStore.increase(1)}
+        onClick={() => dispatchForCountStore({ type: 'INCREASE' })}
       >
-        Add + 1: zustand count is: {countStore.count}
+        Add + 1
       </button>
 
-      <p>
-        Edit <code>Home.tsx</code> and save to test HMR updates.
-      </p>
+      <button
+        className="my-2 rounded-md bg-white px-4 py-1 text-2xl"
+        type="button"
+        onClick={() => dispatchForCountStore({ type: 'DECREASE' })}
+      >
+        Add - 1
+      </button>
+
+      <p>Zustand count is: {countStore.count}</p>
     </>
   )
 }
