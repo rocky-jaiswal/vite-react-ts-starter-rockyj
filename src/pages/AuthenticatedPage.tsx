@@ -3,12 +3,15 @@ import { Navigate, useLocation } from 'react-router-dom'
 
 import { AuthenticationContext } from '../Context/Authentication'
 
-export const AuthenticatedPage: React.FC = () => {
+export const AuthenticatedPage: React.FC<React.PropsWithChildren> = (props) => {
+  const { children } = props
+
   const authenticationContext = useContext(AuthenticationContext)
   const location = useLocation()
 
+  // No auth on root page
   if (location.pathname === '/' || location.pathname === '/home') {
-    return <div />
+    return <>{children}</>
   }
 
   if (!authenticationContext.jsonToken) {
@@ -18,5 +21,6 @@ export const AuthenticatedPage: React.FC = () => {
     // than dropping them off on the home page.
     return <Navigate to="/" state={{ from: location }} replace />
   }
-  return <div />
+
+  return <>{children}</>
 }

@@ -27,9 +27,10 @@ export const Layout: React.FC<Props> = () => {
       <AuthenticationContext.Provider value={authenticationState}>
         <ThemeContext.Provider value={themeState}>
           <LocaleContext.Provider value={localeState}>
-            <AuthenticatedPage />
-            <Nav />
-            <Main children={<Outlet />} />
+            <AuthenticatedPage>
+              <Nav />
+              <Main children={<Outlet />} />
+            </AuthenticatedPage>
           </LocaleContext.Provider>
         </ThemeContext.Provider>
       </AuthenticationContext.Provider>
