@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { dispatchForLocaleStore } from '/@/store'
+
 import { LocaleContext } from '../../Context/Locale'
 
 interface Props {}
@@ -13,7 +15,7 @@ export const ChangeLanguageButton: React.FC<Props> = (_props: Props) => {
 
   const handleChangeLanguage = () => {
     const newLanguage = localeContext.currentLanguage === 'en' ? 'de' : 'en'
-    localeContext.changeLanguage(newLanguage)
+    dispatchForLocaleStore({ type: 'CHANGE_LANGUAGE' })
     changeLanguage(newLanguage)
   }
 
