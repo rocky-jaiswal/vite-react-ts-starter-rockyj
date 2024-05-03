@@ -24,7 +24,7 @@ export const UsersPage: React.FC = () => {
 
       <div
         ref={clickRef}
-        className="rounded-8px mb-5 flex cursor-pointer select-none justify-center bg-black p-5 text-5xl text-white"
+        className="rounded-8px mb-5 flex cursor-pointer select-none justify-center p-5 text-5xl text-white"
       >
         click inside
       </div>

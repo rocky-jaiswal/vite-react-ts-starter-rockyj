@@ -1,15 +1,14 @@
-import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ThemeContext } from '../../Context/Themes'
+interface Props {
+  handleClick: () => void
+}
 
-export const ThemeTogglerButton: React.FC = () => {
-  const theme = useContext(ThemeContext)
-
+export const ThemeTogglerButton: React.FC<Props> = (props: Props) => {
   const { t } = useTranslation()
 
   return (
-    <button onClick={theme.toggleTheme} className="rounded-sm p-4">
+    <button onClick={props.handleClick} className="rounded-sm p-4">
       {t('ThemeTogglerButton.toggleTheme')}
     </button>
   )

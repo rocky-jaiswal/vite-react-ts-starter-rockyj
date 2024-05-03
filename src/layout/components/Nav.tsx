@@ -1,6 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { css } from '@emotion/css'
-import { useContext } from 'react'
 import clsx from 'clsx'
 
 import { routes } from '/@/router'
@@ -8,8 +6,7 @@ import { GithubOctopusCat } from '/@/components/GithubOctopusCat'
 import { ThemeTogglerButton } from '/@/components/ThemeTogglerButton'
 import { DummyAuthButton } from '/@/components/DummyAuthButton'
 import { ChangeLanguageButton } from '/@/components/ChangeLanguageButton'
-
-import { ThemeContext } from '../../Context/Themes'
+import { dispatchForThemeStore } from '/@/store'
 
 const navbarList = routes.map((route) => ({
   id: route.path,
@@ -22,18 +19,9 @@ type Props = {}
 export const Nav: React.FC<Props> = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const theme = useContext(ThemeContext)
 
   return (
-    <nav
-      className={clsx(
-        'left-0 top-0 z-10 w-screen',
-        css`
-          background-color: ${theme.currentTheme.background};
-          color: ${theme.currentTheme.color};
-        `,
-      )}
-    >
+    <nav className={clsx('navbar rounded-box bg-base-100 shadow')}>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between overflow-x-auto overflow-y-hidden">
           <div className="flex-shrink-0 rounded-md px-3 py-2 text-sm font-medium">
@@ -47,9 +35,9 @@ export const Nav: React.FC<Props> = () => {
                   <button
                     key={path}
                     className={clsx(
-                      'flex-shrink-0 rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-gray-700',
-                      path === pathname && 'bg-gray-900',
-                      path !== pathname && 'text-gray-300',
+                      'flex-shrink-0 px-3 py-2 text-sm font-medium',
+                      path === pathname && 'text-secondary',
+                      path !== pathname && 'text-primary',
                     )}
                     onClick={() => navigate(path)}
                   >
@@ -65,7 +53,9 @@ export const Nav: React.FC<Props> = () => {
           </div>
 
           <div>
-            <ThemeTogglerButton />
+            <ThemeTogglerButton
+              handleClick={() => dispatchForThemeStore({ type: 'CHANGE_THEME' })}
+            />
             <DummyAuthButton />
             <ChangeLanguageButton />
           </div>

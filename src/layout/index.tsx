@@ -23,7 +23,10 @@ export const Layout: React.FC<Props> = () => {
   }
 
   return (
-    <>
+    <div
+      data-theme={themeState.currentTheme}
+      className="v-screen flex h-screen min-h-full min-w-full flex-col"
+    >
       <AuthenticationContext.Provider value={authenticationState}>
         <ThemeContext.Provider value={themeState}>
           <LocaleContext.Provider value={localeState}>
@@ -34,6 +37,6 @@ export const Layout: React.FC<Props> = () => {
           </LocaleContext.Provider>
         </ThemeContext.Provider>
       </AuthenticationContext.Provider>
-    </>
+    </div>
   )
 }

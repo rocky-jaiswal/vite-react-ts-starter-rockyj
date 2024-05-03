@@ -23,7 +23,8 @@ export const ReactLogo: React.FC = () => (
   <>
     <img src={logo} className={clsx('pointer-events-none h-[40vmin]', className)} alt="logo" />
     <p>
-      Vite + React + ReactRouter + Zustand + React-i18next + TypeScript + Emotion + TailwindCSS!
+      Vite + React + ReactRouter + Zustand + React-i18next + TypeScript + Emotion + TailwindCSS +
+      DaisyUI
     </p>
   </>
 )

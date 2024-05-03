@@ -1,53 +1,50 @@
 import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
-
-interface Styles {
-  color: string
-  background: string
-}
-
-interface Themes {
-  light: Styles
-  dark: Styles
-}
+import { devtools, persist, createJSONStorage } from 'zustand/middleware'
 
 export interface ThemeState {
-  themes: Themes
-  currentTheme: Styles
-  toggleTheme: () => void
-}
-
-const themes = {
-  light: {
-    color: '#333',
-    background: '#dedede',
-  },
-  dark: {
-    color: '#ddd',
-    background: '#000',
-  },
+  allThemes: string[]
+  currentTheme: string
 }
 
 export const defaultThemeState: ThemeState = {
-  themes,
-  currentTheme: themes.dark,
-  toggleTheme: () => {
-    console.log('not invoked')
-  },
+  allThemes: ['corporate', 'dracula'],
+  currentTheme: 'dracula',
+}
+
+type ActionTypes = 'CHANGE_THEME'
+
+interface Actions {
+  type: ActionTypes
+  payload?: unknown
+}
+
+const reducer = (state: ThemeState, { type }: Actions) => {
+  switch (type) {
+    case 'CHANGE_THEME':
+      return {
+        ...state,
+        currentTheme:
+          state.currentTheme === state.allThemes[0] ? state.allThemes[1] : state.allThemes[0],
+      }
+    default:
+      return state
+  }
 }
 
 export const useThemeStore = create<ThemeState>()(
-  devtools((set) => ({
-    themes: defaultThemeState.themes,
-    currentTheme: defaultThemeState.currentTheme,
-    toggleTheme: () =>
-      set((state) => {
-        // console.log(state)
-        return {
-          ...state,
-          currentTheme:
-            state.currentTheme === state.themes.dark ? state.themes.light : state.themes.dark,
-        }
+  devtools(
+    persist(
+      (_set) => ({
+        allThemes: defaultThemeState.allThemes,
+        currentTheme: defaultThemeState.currentTheme,
       }),
-  })),
+      {
+        name: 'theme-storage',
+        storage: createJSONStorage(() => sessionStorage),
+      },
+    ),
+  ),
 )
+
+export const dispatchForThemeStore = (args: Actions) =>
+  useThemeStore.setState((state: ThemeState) => reducer(state, args))
