@@ -1,18 +1,19 @@
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 
-import { useCountStore } from '/@/store'
+import { useCountStore } from '/@/store';
 
-import { useClickOutSide } from '../hooks/useClickOutSide'
+import { useClickOutSide } from '../hooks/useClickOutSide';
 
 export const UsersPage: React.FC = () => {
-  const zustandCount = useCountStore((state) => state.count)
+  const zustandCount = useCountStore((state) => state.count);
 
-  const [text, setText] = useState('undefined')
+  const [text, setText] = useState('undefined');
 
   const clickRef = useClickOutSide<HTMLDivElement>(
     () => setText(() => 'clickInSide'),
     () => setText(() => 'clickOutSide'),
-  )
+  );
 
   return (
     <>
@@ -31,5 +32,5 @@ export const UsersPage: React.FC = () => {
 
       <div className="font-black">{text}</div>
     </>
-  )
-}
+  );
+};

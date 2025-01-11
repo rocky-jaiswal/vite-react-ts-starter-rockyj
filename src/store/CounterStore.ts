@@ -1,27 +1,27 @@
-import { create } from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import { create } from 'zustand';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 
 interface CountState {
-  count: number
+  count: number;
 }
 
-type ActionTypes = 'INCREASE' | 'DECREASE'
+type ActionTypes = 'INCREASE' | 'DECREASE';
 
 interface Actions {
-  type: ActionTypes
-  payload?: unknown
+  type: ActionTypes;
+  payload?: unknown;
 }
 
 const reducer = (state: CountState, { type }: Actions) => {
   switch (type) {
     case 'INCREASE':
-      return { count: state.count + 1 }
+      return { count: state.count + 1 };
     case 'DECREASE':
-      return { count: state.count - 1 }
+      return { count: state.count - 1 };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const useCountStore = create<CountState>()(
   devtools(
@@ -35,7 +35,7 @@ export const useCountStore = create<CountState>()(
       },
     ),
   ),
-)
+);
 
 export const dispatchForCountStore = (args: Actions) =>
-  useCountStore.setState((state: CountState) => reducer(state, args))
+  useCountStore.setState((state: CountState) => reducer(state, args));

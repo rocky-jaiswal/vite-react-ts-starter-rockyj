@@ -1,7 +1,10 @@
 export const enJSON = {
   translation: {
-    ThemeTogglerButton: {
+    navbar: {
+      welcome: 'Welcome',
+    },
+    themeTogglerButton: {
       toggleTheme: 'Toogle Theme',
     },
   },
-}
+};

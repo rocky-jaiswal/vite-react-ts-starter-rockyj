@@ -1,7 +1,7 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-import { LocaleState, defaultLocaleState } from '/@/store'
+import { LocaleState, defaultLocaleState } from '/@/store';
 
 export const LocaleContext = createContext<LocaleState>({
   ...defaultLocaleState,
-})
+});

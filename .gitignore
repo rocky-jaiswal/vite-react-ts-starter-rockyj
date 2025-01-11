@@ -5,7 +5,6 @@ dist-ssr
 *.local
 .npmrc
 .cache
-package-lock.json
 pnpm-lock.yaml
 
 test/upload-server/static

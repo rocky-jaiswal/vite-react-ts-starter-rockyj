@@ -1,7 +1,10 @@
 export const deJSON = {
   translation: {
-    ThemeTogglerButton: {
-      toggleTheme: 'Toogle Theme(DE)',
+    navbar: {
+      welcome: 'Wilkommen',
+    },
+    themeTogglerButton: {
+      toggleTheme: 'Thema umschalten',
     },
   },
-}
+};

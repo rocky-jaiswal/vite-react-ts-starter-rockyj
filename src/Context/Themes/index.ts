@@ -1,7 +1,7 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
-import { ThemeState, defaultThemeState } from '/@/store'
+import { ThemeState, defaultThemeState } from '/@/store';
 
 export const ThemeContext = createContext<ThemeState>({
   ...defaultThemeState,
-})
+});

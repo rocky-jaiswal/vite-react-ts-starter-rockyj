@@ -1,8 +1,10 @@
-import { useRouteError } from 'react-router-dom'
+import React from 'react';
 
-export const ErrorPage: React.FC = () => {
-  const error: any = useRouteError()
+interface Props {
+  error: unknown;
+}
 
+export const ErrorPage = (props: Props) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <h1 className="text-2xl">Oops!</h1>
@@ -10,8 +12,8 @@ export const ErrorPage: React.FC = () => {
       <p>Sorry, an unexpected error has occurred.</p>
 
       <p>
-        <i>{error?.statusText || error?.message}</i>
+        <i>{props.error as any}</i>
       </p>
     </div>
-  )
-}
+  );
+};

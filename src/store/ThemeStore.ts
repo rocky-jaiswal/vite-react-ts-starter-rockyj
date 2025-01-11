@@ -1,21 +1,21 @@
-import { create } from 'zustand'
-import { devtools, persist, createJSONStorage } from 'zustand/middleware'
+import { create } from 'zustand';
+import { devtools, persist, createJSONStorage } from 'zustand/middleware';
 
 export interface ThemeState {
-  allThemes: string[]
-  currentTheme: string
+  allThemes: string[];
+  currentTheme: string;
 }
 
 export const defaultThemeState: ThemeState = {
   allThemes: ['corporate', 'dracula'],
   currentTheme: 'dracula',
-}
+};
 
-type ActionTypes = 'CHANGE_THEME'
+type ActionTypes = 'CHANGE_THEME';
 
 interface Actions {
-  type: ActionTypes
-  payload?: unknown
+  type: ActionTypes;
+  payload?: unknown;
 }
 
 const reducer = (state: ThemeState, { type }: Actions) => {
@@ -23,13 +23,12 @@ const reducer = (state: ThemeState, { type }: Actions) => {
     case 'CHANGE_THEME':
       return {
         ...state,
-        currentTheme:
-          state.currentTheme === state.allThemes[0] ? state.allThemes[1] : state.allThemes[0],
-      }
+        currentTheme: state.currentTheme === state.allThemes[0] ? state.allThemes[1] : state.allThemes[0],
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const useThemeStore = create<ThemeState>()(
   devtools(
@@ -44,7 +43,7 @@ export const useThemeStore = create<ThemeState>()(
       },
     ),
   ),
-)
+);
 
 export const dispatchForThemeStore = (args: Actions) =>
-  useThemeStore.setState((state: ThemeState) => reducer(state, args))
+  useThemeStore.setState((state: ThemeState) => reducer(state, args));

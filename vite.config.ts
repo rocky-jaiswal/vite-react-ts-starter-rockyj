@@ -1,16 +1,17 @@
 import fs from 'fs'
+import dotenv from 'dotenv'
 import { resolve } from 'path' // dotenv is a "zero-dependent" module that extracts variables in the env variable from the '.env.xxx' file.
 
-import dotenv from 'dotenv'
-import { defineConfig } from 'vite'
-import React from '@vitejs/plugin-react'
 import type { ConfigEnv } from 'vite'
+import { defineConfig } from 'vite'
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import React from '@vitejs/plugin-react'
 
 /**
  * https://vitejs.dev/config/
  */
 const baseConfig = {
-  plugins: [React()],
+  plugins: [TanStackRouterVite(), React()],
   resolve: {
     alias: [
       {
