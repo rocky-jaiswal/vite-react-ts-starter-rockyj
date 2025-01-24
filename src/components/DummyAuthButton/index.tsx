@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { AuthenticationContext } from '../../Context/Authentication';
+import { AuthenticationContext } from '../../context/Authentication';
 
 export const DummyAuthButton: React.FC = () => {
   const authenticationContext = useContext(AuthenticationContext);

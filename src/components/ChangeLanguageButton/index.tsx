@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { dispatchForLocaleStore } from '/@/store';
 
-import { LocaleContext } from '../../Context/Locale';
+import { LocaleContext } from '../../context/Locale';
 
 export const ChangeLanguageButton: React.FC<unknown> = (_props: unknown) => {
   const {

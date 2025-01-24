@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Navigate, useLocation } from '@tanstack/react-router';
 
-import { AuthenticationContext } from '../Context/Authentication';
+import { AuthenticationContext } from '../context/Authentication';
 
 export const AuthenticatedPage: React.FC<React.PropsWithChildren> = (props) => {
   const { children } = props;

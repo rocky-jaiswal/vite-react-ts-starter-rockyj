@@ -3,9 +3,9 @@ import { Outlet } from '@tanstack/react-router';
 
 import { Nav } from './components/Nav';
 
-import { ThemeContext } from '../Context/Themes';
-import { AuthenticationContext } from '../Context/Authentication';
-import { LocaleContext } from '../Context/Locale';
+import { ThemeContext } from '../context/Themes';
+import { AuthenticationContext } from '../context/Authentication';
+import { LocaleContext } from '../context/Locale';
 import { AuthenticatedPage } from '../pages/AuthenticatedPage';
 import { useAuthenticationStore, useLocaleStore, useThemeStore } from '../store';
 

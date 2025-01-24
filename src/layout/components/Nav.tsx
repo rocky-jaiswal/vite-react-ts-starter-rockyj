@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from '@tanstack/react-router';
@@ -6,13 +6,13 @@ import { useLocation } from '@tanstack/react-router';
 import { ThemeTogglerButton } from '/@/components/ThemeTogglerButton';
 import { DummyAuthButton } from '/@/components/DummyAuthButton';
 import { ChangeLanguageButton } from '/@/components/ChangeLanguageButton';
-import { dispatchForThemeStore, useAuthenticationStore } from '/@/store';
-// import { AuthenticationContext } from '/@/Context/Authentication'
+import { dispatchForThemeStore } from '/@/store';
+import { AuthenticationContext } from '../../context/Authentication';
 
 type Props = unknown;
 
 export const Nav: React.FC<Props> = () => {
-  const { isAuthenticated } = useAuthenticationStore();
+  const authenticationContext = useContext(AuthenticationContext);
   const { pathname } = useLocation();
 
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ export const Nav: React.FC<Props> = () => {
           About
         </Link>
 
-        {isAuthenticated ? (
+        {authenticationContext.isAuthenticated ? (
           <>
             <Link to="/users" className="btn btn-ghost">
               Users
