@@ -2,16 +2,21 @@ import React from 'react';
 import i18n from 'i18next';
 
 import { initReactI18next } from 'react-i18next';
-import { RouterProvider } from '@tanstack/react-router';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { enJSON } from '/@/locales/en';
 import { deJSON } from '/@/locales/de';
-import { router } from './router';
 
 import '/@/styles/global.css';
 
-// Register your router for maximum type safety
+// Import the generated route tree
+import { routeTree } from './routeTree.gen';
+
+// Create a new router instance
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;

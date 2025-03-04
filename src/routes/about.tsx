@@ -1,7 +1,9 @@
 import React from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+
 import { useCountStore } from '/@/store';
 
-export const AboutPage: React.FC = () => {
+const Component: React.FC = () => {
   const zustandCount = useCountStore((state) => state.count);
 
   return (
@@ -14,3 +16,7 @@ export const AboutPage: React.FC = () => {
     </>
   );
 };
+
+export const Route = createFileRoute('/about')({
+  component: Component,
+});

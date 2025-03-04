@@ -1,18 +1,17 @@
-import React from 'react';
-import { Outlet } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import * as React from 'react';
+import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 
-import { Nav } from './components/Nav';
-
-import { ThemeContext } from '../context/Themes';
 import { AuthenticationContext } from '../context/Authentication';
 import { LocaleContext } from '../context/Locale';
-import { AuthenticatedPage } from '../pages/AuthenticatedPage';
-import { useAuthenticationStore, useLocaleStore, useThemeStore } from '../store';
+import { ThemeContext } from '../context/Themes';
 
-type Props = unknown;
+import { Nav } from '../components/Nav';
+import { ErrorDisplay } from '../components/ErrorDisplay';
 
-export const Root: React.FC<Props> = () => {
+import { useThemeStore, useAuthenticationStore, useLocaleStore } from '../store';
+
+const Root: React.FC = () => {
   const themeState = useThemeStore();
   const authenticationState = useAuthenticationStore();
   const localeState = useLocaleStore();
@@ -22,12 +21,10 @@ export const Root: React.FC<Props> = () => {
       <AuthenticationContext.Provider value={authenticationState}>
         <ThemeContext.Provider value={themeState}>
           <LocaleContext.Provider value={localeState}>
-            <AuthenticatedPage>
-              <Nav />
-              <div className="flex flex-col container mx-auto px-4">
-                <Outlet />
-              </div>
-            </AuthenticatedPage>
+            <Nav />
+            <div className="flex flex-col container mx-auto px-4">
+              <Outlet />
+            </div>
           </LocaleContext.Provider>
         </ThemeContext.Provider>
       </AuthenticationContext.Provider>
@@ -35,3 +32,8 @@ export const Root: React.FC<Props> = () => {
     </div>
   );
 };
+
+export const Route = createRootRoute({
+  component: Root,
+  errorComponent: ErrorDisplay,
+});

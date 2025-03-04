@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
 
-import { dispatchForCountStore, useCountStore } from '/@/store';
+import { dispatchForCountStore, useCountStore } from '../store';
 
-export const HomePage: React.FC = () => {
+const Component: React.FC = () => {
   const countStore = useCountStore();
 
   const [count, setCount] = useState(0);
@@ -33,3 +34,7 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+
+export const Route = createFileRoute('/')({
+  component: Component,
+});

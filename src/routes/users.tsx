@@ -1,11 +1,12 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { useCountStore } from '/@/store';
-
 import { useClickOutSide } from '../hooks/useClickOutSide';
 
-export const UsersPage: React.FC = () => {
+import { useAuthenticationStore } from '/@/store';
+
+const Component: React.FC = () => {
   const zustandCount = useCountStore((state) => state.count);
 
   const [text, setText] = useState('undefined');
@@ -34,3 +35,15 @@ export const UsersPage: React.FC = () => {
     </>
   );
 };
+
+export const Route = createFileRoute('/users')({
+  component: Component,
+  beforeLoad: async () => {
+    const isAuthenticated = useAuthenticationStore.getState().isAuthenticated;
+    if (!isAuthenticated) {
+      throw redirect({
+        to: '/',
+      });
+    }
+  },
+});
