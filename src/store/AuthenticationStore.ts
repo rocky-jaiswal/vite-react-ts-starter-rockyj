@@ -8,6 +8,13 @@ export interface AuthState {
   signOut: () => void;
 }
 
+type ActionTypes = 'SIGNIN' | 'SIGNOUT';
+
+interface Actions {
+  type: ActionTypes;
+  payload?: unknown;
+}
+
 export const defaultAuthenticationState: AuthState = {
   jsonToken: null,
   isAuthenticated: false,
@@ -17,6 +24,17 @@ export const defaultAuthenticationState: AuthState = {
   signOut: () => {
     console.log('not invoked 2');
   },
+};
+
+const reducer = (state: AuthState, { type }: Actions) => {
+  switch (type) {
+    case 'SIGNIN':
+      return { ...state, isAuthenticated: true };
+    case 'SIGNOUT':
+      return { ...state, isAuthenticated: false };
+    default:
+      return state;
+  }
 };
 
 export const useAuthenticationStore = create<AuthState>()(
@@ -43,3 +61,6 @@ export const useAuthenticationStore = create<AuthState>()(
     ),
   ),
 );
+
+export const dispatchForAuthenticationStore = (args: Actions) =>
+  useAuthenticationStore.setState((state: AuthState) => reducer(state, args));

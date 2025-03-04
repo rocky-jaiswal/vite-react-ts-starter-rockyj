@@ -7,7 +7,7 @@ import { useClickOutSide } from '../hooks/useClickOutSide';
 import { useAuthenticationStore } from '/@/store';
 
 const Component: React.FC = () => {
-  const zustandCount = useCountStore((state) => state.count);
+  const count = useCountStore((state) => state.count);
 
   const [text, setText] = useState('undefined');
 
@@ -21,7 +21,7 @@ const Component: React.FC = () => {
       <h2>Users</h2>
       <h2>
         <span>zustand count: </span>
-        <span>{zustandCount}</span>
+        <span>{count}</span>
       </h2>
 
       <div

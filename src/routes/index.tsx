@@ -5,7 +5,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { dispatchForCountStore, useCountStore } from '../store';
 
 const Component: React.FC = () => {
-  const countStore = useCountStore();
+  const countStore = useCountStore((state) => state.count);
 
   const [count, setCount] = useState(0);
 
@@ -29,7 +29,7 @@ const Component: React.FC = () => {
           Add - 1
         </button>
 
-        <p>Zustand count is: {countStore.count}</p>
+        <p>Zustand count is: {countStore}</p>
       </div>
     </div>
   );
