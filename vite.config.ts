@@ -14,7 +14,14 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
  * https://vitejs.dev/config/
  */
 const baseConfig = {
-  plugins: [TanStackRouterVite(), React(), tailwindcss()],
+  plugins: [
+    TanStackRouterVite({
+      target: 'react',
+      autoCodeSplitting: true,
+    }),
+    React(),
+    tailwindcss(),
+  ],
   resolve: {
     alias: [
       {

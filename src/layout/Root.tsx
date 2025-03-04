@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 
 import { Nav } from './components/Nav';
 
@@ -30,6 +31,7 @@ export const Root: React.FC<Props> = () => {
           </LocaleContext.Provider>
         </ThemeContext.Provider>
       </AuthenticationContext.Provider>
+      <TanStackRouterDevtools />
     </div>
   );
 };

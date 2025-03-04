@@ -15,7 +15,6 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@emotion/css": "11.13.5",
     "@tanstack/react-router": "^1.97.1",
     "clsx": "2.1.1",
     "i18next": "^24.0.0",
