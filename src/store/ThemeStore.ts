@@ -7,8 +7,8 @@ export interface ThemeState {
 }
 
 export const defaultThemeState: ThemeState = {
-  allThemes: ['corporate', 'dracula'],
-  currentTheme: 'dracula',
+  allThemes: ['light', 'dark'],
+  currentTheme: 'dark',
 };
 
 type ActionTypes = 'CHANGE_THEME';

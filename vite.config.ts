@@ -1,16 +1,20 @@
+import type { ConfigEnv } from 'vite';
+import { defineConfig } from 'vite';
+
 import fs from 'fs';
+import { resolve } from 'path'; // dotenv is a "zero-dependent" module that extracts variables in the env variable from the '.env.xxx' file.
+
 import dotenv from 'dotenv';
 import React from '@vitejs/plugin-react';
-import type { ConfigEnv } from 'vite';
-import { resolve } from 'path'; // dotenv is a "zero-dependent" module that extracts variables in the env variable from the '.env.xxx' file.
-import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 
 /**
  * https://vitejs.dev/config/
  */
 const baseConfig = {
-  plugins: [TanStackRouterVite(), React()],
+  plugins: [TanStackRouterVite(), React(), tailwindcss()],
   resolve: {
     alias: [
       {
